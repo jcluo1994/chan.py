@@ -79,6 +79,11 @@ def cal_y_range(meta: CChanPlotMeta, ax):
             y_max = klc_meta.high
         if klc_meta.low < y_min:
             y_min = klc_meta.low
+    # 上下各留 3% 余量，避免最高/最低K线贴边显示不全
+    if y_max > y_min:
+        pad = (y_max - y_min) * 0.03
+        y_min -= pad
+        y_max += pad
     return (y_min, y_max)
 
 
